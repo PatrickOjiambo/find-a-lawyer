@@ -94,8 +94,8 @@ class Reviews(models.Model):
     """
     Reviews table
     """
-    lawyer_id = models.CharField(max_length=100)
-    client_id = models.CharField(max_length=100)
+    lawyer_id = models.ForeignKey(Lawyer, on_delete=models.CASCADE)
+    client_id = models.ForeignKey(Client, on_delete=models.CASCADE)
     review = models.TextField()
     review_id = models.AutoField(primary_key=True)
     rating = models.IntegerField()
