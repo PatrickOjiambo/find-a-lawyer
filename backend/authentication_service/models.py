@@ -1,3 +1,4 @@
+#type: ignore
 from django.db import models
 
 # Create your models here.
@@ -10,20 +11,20 @@ class Lawyer(models.Model):
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
     email = models.EmailField(unique=True, null=False)
-    password = models.CharField(max_length=100)
     phone = models.CharField(max_length=10)
     address = models.TextField()
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=10)
-    image_url = models.CharField(max_length=100)
-    specific_focus_ares = models.CharField(max_length=50)
-    lawyer_resume = models.CharField(max_length=100)
+    image_url = models.CharField(max_length=200)#Will be a url for a file saved in aws cloud
+    specific_focus_areas = models.CharField(max_length=50)
+    lawyer_resume = models.CharField(max_length=100)#will be a file saved in aws cloud
     lawyer_bio = models.TextField()
-    password_hash = models.CharField(max_length=100)
+    password_hash = models.CharField(max_length=100, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     lawyer_id = models.AutoField(primary_key=True)
+    profile_completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -40,14 +41,14 @@ class Client(models.Model):
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
     email = models.EmailField(null=False, unique=True)
-    password = models.CharField(max_length=100)
+   
     phone = models.CharField(max_length=10)
     address = models.TextField()
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=10)
-    image_url = models.CharField(max_length=100)
+    image_url = models.CharField(max_length=100) #Will be a url for a file saved in aws cloud
     password_hash = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     client_id = models.CharField(max_length=100)
