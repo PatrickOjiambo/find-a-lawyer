@@ -1,4 +1,4 @@
-#type: ignore
+# type: ignore
 from django.db import models
 
 # Create your models here.
@@ -11,25 +11,27 @@ class Lawyer(models.Model):
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
     email = models.EmailField(unique=True, null=False)
-    phone = models.CharField(max_length=10)
-    address = models.TextField()
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10)
-    image_url = models.CharField(max_length=200)#Will be a url for a file saved in aws cloud
-    specific_focus_areas = models.CharField(max_length=50)
-    lawyer_resume = models.CharField(max_length=100)#will be a file saved in aws cloud
-    lawyer_bio = models.TextField()
+    phone = models.CharField(max_length=10, null=False)
+    address = models.TextField(default='')
+    city = models.CharField(max_length=100, default='')
+    state = models.CharField(max_length=100, default='')
+    country = models.CharField(max_length=100, default='')
+    zip_code = models.CharField(max_length=10, default='')
+    # Will be a url for a file saved in aws cloud
+    image_url = models.CharField(max_length=200, default='')
+    specific_focus_areas = models.CharField(max_length=50, default='')
+    # will be a file saved in aws cloud
+    lawyer_resume = models.CharField(max_length=100, default='')
+    lawyer_bio = models.TextField(default='')
     password_hash = models.CharField(max_length=100, null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    lawyer_id = models.AutoField(primary_key=True)
-    profile_completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True,)
+    lawyer_id = models.AutoField(primary_key=True, unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
+        db_table = 'Lawyer'
         verbose_name = 'Lawyer'
         verbose_name_plural = 'Lawyers'
 
@@ -40,16 +42,17 @@ class Client(models.Model):
     """
     first_name = models.CharField(max_length=100, null=False)
     last_name = models.CharField(max_length=100, null=False)
-    email = models.EmailField(null=False, unique=True)
-   
-    phone = models.CharField(max_length=10)
-    address = models.TextField()
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10)
-    image_url = models.CharField(max_length=100) #Will be a url for a file saved in aws cloud
-    password_hash = models.CharField(max_length=100)
+    email = models.EmailField(unique=False)
+
+    phone = models.CharField(max_length=10, default='')
+    address = models.TextField(default='')
+    city = models.CharField(max_length=100, default='')
+    state = models.CharField(max_length=100, default='')
+    country = models.CharField(max_length=100, default='')
+    zip_code = models.CharField(max_length=10, default='')
+    # Will be a url for a file saved in aws cloud
+    image_url = models.CharField(max_length=100, default='')
+    password_hash = models.CharField(max_length=100, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     client_id = models.CharField(max_length=100)
 
@@ -57,6 +60,7 @@ class Client(models.Model):
         return self.name
 
     class Meta:
+        db_table = 'Client'
         verbose_name = 'Client'
         verbose_name_plural = 'Clients'
 
@@ -72,6 +76,7 @@ class Roles(models.Model):
         return self.role_name
 
     class Meta:
+        db_table = 'Roles'
         verbose_name = 'Role'
         verbose_name_plural = 'Roles'
 
@@ -87,6 +92,7 @@ class Lawyer_practice_areas(models.Model):
         return self.lawyer_id
 
     class Meta:
+        db_table = 'Lawyer_practice_areas'
         verbose_name = 'Lawyer Practice Area'
         verbose_name_plural = 'Lawyer Practice Areas'
 
@@ -106,5 +112,6 @@ class Reviews(models.Model):
         return self.lawyer_id
 
     class Meta:
+        db_table = 'Reviews'
         verbose_name = 'Review'
         verbose_name_plural = 'Reviews'

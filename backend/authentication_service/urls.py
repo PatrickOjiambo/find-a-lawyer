@@ -1,5 +1,6 @@
+#type: ignore
 from django.urls import path
-from . import views
+from .lawyerView import LawyerList
 urlpatterns = [
-    path('login/', views.login, name='login'),
+path('auth/lawyer-sign-up', LawyerList.as_view(), name="lawyer-sign-up")
 ]

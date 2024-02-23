@@ -1,3 +1,4 @@
+#type: ignore
 from rest_framework import serializers
 from .models import Client, Lawyer, Lawyer_practice_areas, Reviews, Roles
 class ClientSerializer(serializers.ModelSerializer):
