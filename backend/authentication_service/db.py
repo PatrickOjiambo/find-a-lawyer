@@ -33,6 +33,8 @@ class DB:
             return Lawyer.objects.get(**kwargs)
         except ObjectDoesNotExist:
             raise ObjectDoesNotExist("Lawyer not found")
+        except Exception as e:
+            raise ValueError(str(e))
 
     def update_user(self, lawyer_id: int, user_data: Dict[str, Any]) -> Lawyer:
         """
